@@ -9,10 +9,38 @@
 >
 > [CFN Resources]: https://docs.aws.amazon.com/cdk/latest/guide/constructs.html#constructs_lib
 
+![cdk-constructs: Experimental](https://img.shields.io/badge/cdk--constructs-experimental-important.svg?style=for-the-badge)
+
+> The APIs of higher level constructs in this module are experimental and under active development.
+> They are subject to non-backward compatible changes or removal in any future version. These are
+> not subject to the [Semantic Versioning](https://semver.org/) model and breaking changes will be
+> announced in the release notes. This means that while you may use them, you may need to update
+> your source code when upgrading to a newer version of this package.
+
 ---
 
 <!--END STABILITY BANNER-->
 
+## TODO List
+
+- Configuration
+    - simplified configuration data construction?
+- LDAP Server MetaData
+- LogList
+- MaintenanceWindow
+- TagsEntry
+- Add missing "StorageType"
+- Better ActiveMQ specific checks and tests
+
+
 ```ts
-import * as amazonmq from '@aws-cdk/aws-amazonmq';
+import * as mq from '@aws-cdk/aws-amazonmq';
+
+new mq.Broker(this, 'MyMessageBroker', {
+  engineType: mq.BrokerEngineType.ACTIVE_MQ,
+  engineVersion: mq.BrokerEngineVersion.forActiveMQ(mq.ActiveMQEngineVersion.V_5_15_14),
+  hostInstanceType: mq.BrokerInstanceType.forActiveMQ(mq.ActiveMQBrokerInstanceSize.MQ_T2_MICRO),
+  deploymentMode: mq.BrokerDeploymentMode.SINGLE_INSTANCE,
+  vpc: new ec2.Vpc(this, 'MyVpc'),
+});
 ```
