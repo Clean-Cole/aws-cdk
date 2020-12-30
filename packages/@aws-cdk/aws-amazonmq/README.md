@@ -44,3 +44,11 @@ new mq.Broker(this, 'MyMessageBroker', {
   vpc: new ec2.Vpc(this, 'MyVpc'),
 });
 ```
+
+```ts
+new mq.BrokerConfiguration(stack, 'MyBrokerConfig', {
+  engineType: mq.BrokerEngineType.ACTIVE_MQ,
+  engineVersion: mq.BrokerEngineVersion.forActiveMQ(mq.ActiveMQEngineVersion.V_5_15_12),
+  configurationData: '<xml></xml>',
+});
+```
